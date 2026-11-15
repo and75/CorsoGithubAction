@@ -1,0 +1,28 @@
+name: 01 Hello
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Chi salutare
+        type: string
+        required: true
+        default: Parigi
+      shout:
+        description: Scrivere il saluto in maiuscolo
+        type: boolean
+        default: false
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Saluta
+        env:
+          NAME: ${{ inputs.name }}
+          SHOUT: ${{ inputs.shout }}
+        run: |
+          MSG="Ciao, $NAME!"
+          if [ "$SHOUT" = "true" ]; then
+            MSG=$(echo "$MSG" | tr '[:lower:]' '[:upper:]')
+          fi
+          echo "$MSG"
+          echo "Avviato da $GITHUB_ACTOR sul ref $GITHUB_REF"
