@@ -1,7 +1,7 @@
 // capstone/check.js — versione Node del controllo del capstone (con il bug)
 const path = require("node:path");
 
-const REPORT = "data/reports/summary.txt";
+const REPORT = path.join("data", "reports", "summary.txt");
 const actual = path.join("data", "reports", "summary.txt");
 
 if (actual !== REPORT) {
