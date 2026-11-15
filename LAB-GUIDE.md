@@ -68,6 +68,7 @@ Un piccolo progetto Node, con questi comandi:
 ### Suggerimenti
 
 - Due job senza `needs` partono in parallelo.
+- Prettier controlla anche i file YAML dei workflow: se `format:check` segnala il tuo `node-ci.yml`, esegui `npm run format` e fai un nuovo commit.
 - Metti `timeout-minutes` su ogni job.
 - In cima al file, `permissions: contents: read` basta per entrambi i job.
 - I revisori obbligatori e alcune regole dipendono dal piano GitHub: su un piano gratuito usate un repository pubblico.
