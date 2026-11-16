@@ -1,0 +1,31 @@
+name: Benvenuto in due step
+on:
+  issues:
+    types: [opened]
+permissions:
+  issues: write
+jobs:
+  commento:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Commenta la nuova issue
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Versione in due step: grazie per la segnalazione!",
+            });
+      - name: Segna i bug da valutare
+        if: contains(github.event.issue.labels.*.name, 'bug')
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["da-valutare"],
+            });
