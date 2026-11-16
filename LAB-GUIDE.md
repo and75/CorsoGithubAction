@@ -1,6 +1,6 @@
 # Guida ai lab del corso GitHub Actions
 
-Tre esercizi da svolgere in questo repository. Per ognuno trovi l'obiettivo, i passi, come capire che hai finito e dove sta la soluzione.
+Quattro esercizi da svolgere in questo repository. Per ognuno trovi l'obiettivo, i passi, come capire che hai finito e dove sta la soluzione.
 
 Regola valida per tutti: **ogni modifica passa da un branch e da una pull request**, anche se è di una riga.
 
@@ -106,3 +106,34 @@ Il messaggio di errore dice quali due percorsi non coincidono. Il fix è di una 
 ### Soluzione
 
 `soluzioni/capstone/pr-gate.yml`. Il fix di `check.js` è descritto in fondo a `soluzioni/capstone/README.md`.
+
+---
+
+## Lab 3 · GitHub Script: rispondere alle issue (30 minuti)
+
+**Obiettivo.** Ogni nuova issue riceve un commento di benvenuto scritto dal workflow, e le issue con l'etichetta `bug` ricevono in più l'etichetta `da-valutare`.
+
+**Fatto quando.** Apri due issue, una senza etichette e una con `bug`: su entrambe compare il commento, e solo la seconda riceve la nuova etichetta.
+
+### Passi
+
+1. Crea un branch, per esempio `lab-3`.
+2. Crea `.github/workflows/benvenuto.yml`: parte quando si apre una issue e ha un solo step, che usa la action `actions/github-script` per aggiungere un commento alla issue.
+3. Dai al workflow il permesso di scrivere sulle issue.
+4. Fai il merge su `main`. Un workflow avviato dalle issue gira solo se il file è sul branch di default.
+5. Apri una issue e guarda il commento. Nella scheda **Actions** apri la run e leggi il log dello step.
+6. Aggiungi un secondo step, con un nome, che gira solo se la issue ha l'etichetta `bug` e aggiunge l'etichetta `da-valutare`. Dai un nome anche al primo step.
+7. Sposta il testo del commento nel file `.github/ISSUE_RESPONSES/benvenuto.md` e fallo leggere allo script. Ricorda che prima serve `actions/checkout`.
+8. Apri due issue di prova, una con `bug` e una senza, e controlla il risultato.
+
+### Suggerimenti
+
+- Dentro lo script trovi già pronti `github` (il client autenticato) e `context` (i dati della run).
+- Il commento si crea con `github.rest.issues.createComment`, le etichette si aggiungono con `github.rest.issues.addLabels`.
+- Numero della issue e repository si leggono da `context.issue.number`, `context.repo.owner` e `context.repo.repo`.
+- La condizione sullo step è `if: contains(github.event.issue.labels.*.name, 'bug')`.
+- Se lo script cresce, mettilo in un file del repository e richiamalo con `require`.
+
+### Soluzione
+
+Cartella `soluzioni/argomento-3`: quattro versioni successive del workflow, dal commento semplice allo script in un file separato. Per provarle copia il file che ti interessa in `.github/workflows`; le versioni 3 e 4 usano anche `benvenuto.md` e `benvenuto.js`, da copiare in `.github/ISSUE_RESPONSES` e `.github/scripts`.

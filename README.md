@@ -12,7 +12,7 @@ Repository degli esercizi del corso GitHub Actions (MiDevo).
 
 | Percorso                  | A che cosa serve                                           |
 | ------------------------- | ---------------------------------------------------------- |
-| `LAB-GUIDE.md`            | I passi di Lab 1, Lab 2 e capstone                         |
+| `LAB-GUIDE.md`            | I passi di Lab 1, Lab 2, capstone e Lab 3                  |
 | `src/`, `test/`           | Il piccolo progetto Node che la CI deve proteggere (Lab 2) |
 | `scripts/scan-secrets.js` | Lo scanner dei segreti usato dal job `scan` (Lab 2)        |
 | `capstone/check.js`       | Il controllo del capstone, con un bug da scoprire          |
