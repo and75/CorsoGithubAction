@@ -123,7 +123,7 @@ Il messaggio di errore dice quali due percorsi non coincidono. Il fix è di una 
 4. Fai il merge su `main`. Un workflow avviato dalle issue gira solo se il file è sul branch di default.
 5. Apri una issue e guarda il commento. Nella scheda **Actions** apri la run e leggi il log dello step.
 6. Aggiungi un secondo step, con un nome, che gira solo se la issue ha l'etichetta `bug` e aggiunge l'etichetta `da-valutare`. Dai un nome anche al primo step.
-7. Sposta il testo del commento nel file `.github/ISSUE_RESPONSES/benvenuto.md` e fallo leggere allo script. Ricorda che prima serve `actions/checkout`.
+7. Sposta il testo del commento nel file `.github/ISSUE_RESPONSES/benvenuto.md` e fallo leggere allo script. Ricorda che prima serve `actions/checkout`, e che tra i permessi del workflow va aggiunto `contents: read`.
 8. Apri due issue di prova, una con `bug` e una senza, e controlla il risultato.
 
 ### Suggerimenti
